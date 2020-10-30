@@ -25,7 +25,7 @@ public class PrefabWindow : EditorWindow
         prefabIndex = EditorGUILayout.Popup("Prefab", prefabIndex, prefabName);
         prefab = prefabName[prefabIndex];
         Repaint();
+        EditorGUILayout.EndScrollView();
         EditorGUILayout.EndVertical();
-
     }
 }

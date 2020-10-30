@@ -1,21 +1,20 @@
-﻿using UnityEditor;
-using UnityEditor.IMGUI.Controls;
-using UnityEngine;
-using UnityEngine.WSA;
+﻿using UnityEngine;
+using System.Collections;
+using UnityEditor;
 
 [CustomEditor(typeof(Tile))]
 public class TileEditor : Editor
 {
     private Tile tgt;
 
-
     private void OnEnable()
     {
         tgt = (Tile)target;
+
     }
 
-    private void OnSceneGUI()
-    {
+    void OnSceneGUI()
+    {/*
         Handles.BeginGUI();
         DrawButton(tgt.currentTileName.ToString(), tgt.transform.position, Vector3.zero);
         var value = 300 / Vector3.Distance(Camera.current.transform.position, tgt.transform.position);
@@ -33,14 +32,23 @@ public class TileEditor : Editor
         {
             DrawButton("+", tgt.transform.position - tgt.transform.right * value, tgt.left.transform.position);
         }
+        Handles.EndGUI();*/
+        Handles.BeginGUI();
+        DrawButton(tgt.currentTileName.ToString(), tgt.transform.position, Vector3.zero);
+        var addValue = 300 / Vector3.Distance(Camera.current.transform.position, tgt.transform.position);
+        if (tgt.forward && (!Physics.Raycast(tgt.transform.position, tgt.transform.forward, 20)) && !Physics.Raycast(tgt.transform.position, tgt.transform.forward, 5)) DrawButton("+", tgt.transform.position + tgt.transform.forward * addValue, tgt.forward.transform.position);
+        //DrawButton("+", _target.transform.position - _target.transform.forward * addValue, _target.back.transform.position, ButtonType.Add);
+        if (tgt.right && (!Physics.Raycast(tgt.transform.position, tgt.transform.right, 20)) && !Physics.Raycast(tgt.transform.position, tgt.transform.right, 5)) DrawButton("+", tgt.transform.position + tgt.transform.right * addValue, tgt.right.transform.position);
+        if (tgt.left && (!Physics.Raycast(tgt.transform.position, -tgt.transform.right, 20)) && !Physics.Raycast(tgt.transform.position, -tgt.transform.right, 5)) DrawButton("+", tgt.transform.position - tgt.transform.right * addValue, tgt.left.transform.position);
         Handles.EndGUI();
     }
+   
 
     private void DrawButton(string text, Vector3 pos, Vector3 dir)
     {
         var _pos = Camera.current.WorldToScreenPoint(pos);
-        var size = 200 / Vector3.Distance(Camera.current.transform.position, pos);
-        var rect = new Rect(pos.x - size / 2, Screen.height - pos.y - size, size, size /2);
+        var size = 2000 / Vector3.Distance(Camera.current.transform.position, pos);
+        var rect = new Rect(_pos.x - size / 2, Screen.height - _pos.y - size, size, size /2);
 
         if (GUI.Button(rect, text))
         {
@@ -48,30 +56,30 @@ public class TileEditor : Editor
             switch(PrefabWindow.prefab)
             {
                 case "Pared":
-                    t = (Tile)Resources.Load("Pared", typeof(Tile));
+                    t = (Tile)Resources.Load("Prefabs/Pared", typeof(Tile));
                     break;
                 case "Final":
-                    t = (Tile)Resources.Load("Final", typeof(Tile));
+                    t = (Tile)Resources.Load("Prefabs/Final", typeof(Tile));
                     break;
                 case "Cruce":
-                    t = (Tile)Resources.Load("Cruce", typeof(Tile));
+                    t = (Tile)Resources.Load("Prefabs/Cruce", typeof(Tile));
                     break;
                 case "ParedConcava":
-                    t = (Tile)Resources.Load("ParedConcava", typeof(Tile));
+                    t = (Tile)Resources.Load("Prefabs/ParedConcava", typeof(Tile));
                     break;
                 case "PisoTecho":
-                    t = (Tile)Resources.Load("PisoTecho", typeof(Tile));
+                    t = (Tile)Resources.Load("Prefabs/PisoTecho", typeof(Tile));
                     break;
                 case "PuertaAbierta":
-                    t = (Tile)Resources.Load("PuertaAbierta", typeof(Tile));
+                    t = (Tile)Resources.Load("Prefabs/PuertaAbierta", typeof(Tile));
                     break;
                 
             }
             Tile _tile = Instantiate(t);
-            t.transform.forward = (dir - tgt.transform.position).normalized;
-            t.transform.position = dir + (_tile.transform.forward.normalized * 3f);
-            Selection.activeObject = t;
-            SceneView.lastActiveSceneView.LookAt(t.transform.position);
+            _tile.transform.forward = (dir - tgt.transform.position).normalized;
+            _tile.transform.position = dir + (_tile.transform.forward.normalized * 3f);
+            Selection.activeObject = _tile;
+            SceneView.lastActiveSceneView.LookAt(_tile.transform.position);
         }
     }
 }

@@ -13,6 +13,7 @@ public class Tile : MonoBehaviour
         PisoTecho,
         PuertaAbierta
     }
+    public bool HOLA;
 
     public GameObject forward, back, left, right;
 
