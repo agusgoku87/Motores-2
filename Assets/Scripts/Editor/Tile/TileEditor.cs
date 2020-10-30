@@ -1,5 +1,7 @@
 ﻿using UnityEditor;
+using UnityEditor.IMGUI.Controls;
 using UnityEngine;
+using UnityEngine.WSA;
 
 [CustomEditor(typeof(Tile))]
 public class TileEditor : Editor
@@ -15,6 +17,22 @@ public class TileEditor : Editor
     private void OnSceneGUI()
     {
         Handles.BeginGUI();
+        DrawButton(tgt.currentTileName.ToString(), tgt.transform.position, Vector3.zero);
+        var value = 300 / Vector3.Distance(Camera.current.transform.position, tgt.transform.position);
+        if(tgt.forward && (!Physics.Raycast(tgt.transform.position, tgt.transform.forward, 20)))
+        {
+            DrawButton("+", tgt.transform.position + tgt.transform.forward * value, tgt.forward.transform.position);
+        }
+
+        else if (tgt.right && (!Physics.Raycast(tgt.transform.position, tgt.transform.right, 20)))
+        {
+            DrawButton("+", tgt.transform.position + tgt.transform.right * value, tgt.right.transform.position);
+        }
+
+        else if (tgt.left && (!Physics.Raycast(tgt.transform.position, -tgt.transform.right, 20)))
+        {
+            DrawButton("+", tgt.transform.position - tgt.transform.right * value, tgt.left.transform.position);
+        }
         Handles.EndGUI();
     }
 
@@ -29,27 +47,25 @@ public class TileEditor : Editor
             Tile t = new Tile();
             switch(PrefabWindow.prefab)
             {
-                case "PuertaDoble":
-                    t = (Tile)Resources.Load("Prefabs/PuertaDoble", typeof(Tile));
+                case "Pared":
+                    t = (Tile)Resources.Load("Pared", typeof(Tile));
                     break;
-                case "PuertaDobleAbierta":
-                    t = (Tile)Resources.Load("Prefabs/PuertaDobleAbierta", typeof(Tile));
+                case "Final":
+                    t = (Tile)Resources.Load("Final", typeof(Tile));
                     break;
-                case "Arco":
-                    t = (Tile)Resources.Load("Prefabs/Arco", typeof(Tile));
-                    break;
-                case "Piso":
-                    t = (Tile)Resources.Load("Prefabs/Piso", typeof(Tile));
+                case "Cruce":
+                    t = (Tile)Resources.Load("Cruce", typeof(Tile));
                     break;
                 case "ParedConcava":
-                    t = (Tile)Resources.Load("Prefabs/ParedConcava", typeof(Tile));
+                    t = (Tile)Resources.Load("ParedConcava", typeof(Tile));
                     break;
-                case "ParedConvexa":
-                    t = (Tile)Resources.Load("Prefabs/ParedConvexa", typeof(Tile));
+                case "PisoTecho":
+                    t = (Tile)Resources.Load("PisoTecho", typeof(Tile));
                     break;
-                case "Pared":
-                    t = (Tile)Resources.Load("Prefabs/Pared", typeof(Tile));
+                case "PuertaAbierta":
+                    t = (Tile)Resources.Load("PuertaAbierta", typeof(Tile));
                     break;
+                
             }
             Tile _tile = Instantiate(t);
             t.transform.forward = (dir - tgt.transform.position).normalized;

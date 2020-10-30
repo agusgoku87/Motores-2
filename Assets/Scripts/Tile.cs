@@ -6,31 +6,27 @@ public class Tile : MonoBehaviour
 {
     public enum TileName
     {
-        PuertaDoble,
-        PuertaDobleAbierta,
-        Arco,
-        Piso,
-        ParedConcava,
-        ParedConvexa,
         Pared,
-        Fin
+        Final,
+        Cruce,
+        ParedConcava,
+        PisoTecho,
+        PuertaAbierta
     }
 
-    //public List<string> TileNames = new List<string>() 
-    //{ "PuertaDoble", "PuertaDobleAbierta", "Arco", "Piso", "ParedConcava", "ParedConvexa", "Pared" };
+    public GameObject forward, back, left, right;
 
     public TileName currentTileName
     {
         get
         {
             var gameObjectName = gameObject.name;
-            if (gameObjectName.Contains("PuertaDoble")) return TileName.PuertaDoble;
-            if (gameObjectName.Contains("PuertaDobleAbierta")) return TileName.PuertaDobleAbierta;
-            if (gameObjectName.Contains("Arco")) return TileName.Arco;
-            if (gameObjectName.Contains("Piso")) return TileName.Piso;
-            if (gameObjectName.Contains("ParedConvexa")) return TileName.ParedConvexa;
-            if (gameObjectName.Contains("ParedConcava")) return TileName.ParedConcava;
-            else return TileName.Pared;
+            if (gameObjectName.Contains("Pared")) return TileName.Pared;
+            else if (gameObjectName.Contains("Cruce")) return TileName.Cruce;
+            else if (gameObjectName.Contains("ParedConcava")) return TileName.ParedConcava;
+            else if (gameObjectName.Contains("PisoTecho")) return TileName.PisoTecho;
+            else if (gameObjectName.Contains("PuertaAbierta")) return TileName.PuertaAbierta;
+            else return TileName.Final;
 
         }
     }
