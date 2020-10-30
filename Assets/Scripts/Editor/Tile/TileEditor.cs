@@ -36,10 +36,22 @@ public class TileEditor : Editor
         Handles.BeginGUI();
         DrawButton(tgt.currentTileName.ToString(), tgt.transform.position, Vector3.zero);
         var addValue = 300 / Vector3.Distance(Camera.current.transform.position, tgt.transform.position);
-        if (tgt.forward && (!Physics.Raycast(tgt.transform.position, tgt.transform.forward, 20)) && !Physics.Raycast(tgt.transform.position, tgt.transform.forward, 5)) DrawButton("+", tgt.transform.position + tgt.transform.forward * addValue, tgt.forward.transform.position);
-        //DrawButton("+", _target.transform.position - _target.transform.forward * addValue, _target.back.transform.position, ButtonType.Add);
-        if (tgt.right && (!Physics.Raycast(tgt.transform.position, tgt.transform.right, 20)) && !Physics.Raycast(tgt.transform.position, tgt.transform.right, 5)) DrawButton("+", tgt.transform.position + tgt.transform.right * addValue, tgt.right.transform.position);
-        if (tgt.left && (!Physics.Raycast(tgt.transform.position, -tgt.transform.right, 20)) && !Physics.Raycast(tgt.transform.position, -tgt.transform.right, 5)) DrawButton("+", tgt.transform.position - tgt.transform.right * addValue, tgt.left.transform.position);
+        if (tgt.forward && (Physics.Raycast(tgt.transform.position, tgt.transform.forward, 20)))
+        {
+            DrawButton("+", tgt.transform.position + tgt.transform.forward * addValue, tgt.forward.transform.position);
+        }
+        if (tgt.back && (Physics.Raycast(tgt.transform.position, -tgt.transform.forward, 20)))
+        {
+            DrawButton("+", tgt.transform.position + -tgt.transform.forward * addValue, tgt.back.transform.position);
+        }
+        if (tgt.right && (Physics.Raycast(tgt.transform.position, tgt.transform.right, 20)))
+        {
+            DrawButton("+", tgt.transform.position + tgt.transform.right * addValue, tgt.right.transform.position);
+        }
+        if (tgt.left && (Physics.Raycast(tgt.transform.position, -tgt.transform.right, 20)))
+        { 
+            DrawButton("+", tgt.transform.position - tgt.transform.right * addValue, tgt.left.transform.position);
+        } 
         Handles.EndGUI();
     }
    
