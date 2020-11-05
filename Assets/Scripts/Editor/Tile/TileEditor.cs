@@ -85,7 +85,6 @@ public class TileEditor : Editor
                 case "PuertaAbierta":
                     t = (Tile)Resources.Load("Prefabs/PuertaAbierta", typeof(Tile));
                     break;
-                
             }
             Tile _tile = Instantiate(t);
             _tile.transform.forward = (dir - tgt.transform.position).normalized;
