@@ -88,8 +88,7 @@ public class TileEditor : Editor
             }
             Tile _tile = Instantiate(t);
             _tile.transform.forward = (dir - tgt.transform.position).normalized;
-            //_tile.transform.position = dir + (_tile.transform.forward.normalized * 3f);
-            _tile.transform.position = dir + (t.transform.forward.normalized * -Vector3.Distance(t.back.transform.position, t.transform.position));
+            _tile.transform.position = dir + (_tile.transform.forward.normalized * 3f);
             Selection.activeObject = _tile;
             SceneView.lastActiveSceneView.LookAt(_tile.transform.position);
         }
