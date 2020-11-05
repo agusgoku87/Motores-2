@@ -120,6 +120,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 --- !u!1 &19533590
 GameObject:
@@ -674,6 +675,8 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &517816105
 =======
+=======
+>>>>>>> parent of 021a698... Arreglo de instancia
 --- !u!1 &705507993
 >>>>>>> Stashed changes
 GameObject:
@@ -2380,6 +2383,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   m_GameObject: {fileID: 1480203848}
   m_Mesh: {fileID: 4300000, guid: 318fc5659f68549feb9d55d15a12de2a, type: 3}
@@ -2843,6 +2847,8 @@ MeshFilter:
   m_GameObject: {fileID: 1744968043}
   m_Mesh: {fileID: 4300000, guid: f6768e02308fe4b40ba12aece1070179, type: 3}
 =======
+=======
+>>>>>>> parent of 021a698... Arreglo de instancia
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
@@ -2851,7 +2857,10 @@ MeshFilter:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of 021a698... Arreglo de instancia
 --- !u!1001 &1753395485
 PrefabInstance:
   m_ObjectHideFlags: 0
